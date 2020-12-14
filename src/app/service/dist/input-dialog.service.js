@@ -49,63 +49,52 @@ var InputDialogService = /** @class */ (function () {
         this.dataService = dataService;
         this.alertController = alertController;
     }
-    InputDialogService.prototype.moveDetail = function (item) {
+    InputDialogService.prototype.moveDetail = function (movie, index) {
         return __awaiter(this, void 0, void 0, function () {
             var alert;
+            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.alertController.create({
-                            header: item.title,
-                            inputs: [
-                                {
-                                    name: 'rated',
-                                    placeholder: 'Rated',
-                                    value: item.rated,
-                                    disabled: true
-                                },
-                                {
-                                    name: 'year',
-                                    placeholder: 'Year',
-                                    value: item.year,
-                                    disabled: true
-                                },
-                                {
-                                    name: 'language',
-                                    placeholder: 'Language',
-                                    value: item.language,
-                                    disabled: true
-                                },
-                                {
-                                    name: 'genre',
-                                    placeholder: 'Genre',
-                                    value: item.genre,
-                                    disabled: true
-                                },
-                                {
-                                    name: 'director',
-                                    placeholder: 'Director',
-                                    value: item.director,
-                                    disabled: true
-                                },
-                                {
-                                    name: 'runtime',
-                                    placeholder: 'Runtime',
-                                    value: item.runtime,
-                                    disabled: true
-                                },
-                            ],
-                            message: item.plot + '<br><br>Actors: ' + item.actors,
-                            buttons: [
-                                {
-                                    text: 'Done',
-                                    role: 'cancel',
-                                    cssClass: 'secondary',
-                                    handler: function () {
-                                        console.log('Done item detail');
+                    case 0:
+                        console.log("ADDING: " + movie);
+                        return [4 /*yield*/, this.alertController.create({
+                                header: movie.title,
+                                message: movie.plot +
+                                    '<br><br><img src=' + movie.poster + ' style="height:10%;width: 10%">' +
+                                    '<br><br><div class="card-detail">Actors: ' + movie.actors +
+                                    '<br><br>Director: ' + movie.director +
+                                    '<br><br>Rating: ' + movie.rated +
+                                    '<br><br>Year: ' + movie.year +
+                                    '<br><br>Genre: ' + movie.genre +
+                                    '<br><br>Year: ' + movie.year +
+                                    '<br><br>Language: ' + movie.language +
+                                    '<br><br>Runtim : ' + movie.runtime + '</div>',
+                                inputs: [
+                                    {
+                                        name: '_id',
+                                        placeholder: '_id',
+                                        value: movie.imdbID,
+                                        disabled: true
+                                    },
+                                ],
+                                buttons: [
+                                    {
+                                        text: 'Done',
+                                        role: 'cancel',
+                                        cssClass: 'secondary',
+                                        handler: function () {
+                                            console.log('Done item detail');
+                                        }
+                                    },
+                                    {
+                                        text: movie ? 'Save' : 'Add',
+                                        handler: function () {
+                                            console.log("ADDING: " + movie.imdbID);
+                                            _this.dataService.addMovie(movie);
+                                        }
                                     }
-                                }
-                            ]
-                        })];
+                                ]
+                            })];
                     case 1:
                         alert = _a.sent();
                         return [4 /*yield*/, alert.present()];

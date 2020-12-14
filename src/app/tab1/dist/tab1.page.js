@@ -51,7 +51,7 @@ var Tab1Page = /** @class */ (function () {
         this.dataService = dataService;
         this.inputDialog = inputDialog;
         this.socialSharing = socialSharing;
-        this.title = "Movie Finder";
+        this.title = "FlickShare";
     }
     Tab1Page.prototype.loadItems = function (evt) {
         return __awaiter(this, void 0, void 0, function () {
@@ -114,7 +114,7 @@ var Tab1Page = /** @class */ (function () {
                     case 1:
                         toast = _a.sent();
                         toast.present(); // displays toast 
-                        message = "I just saw this movie: " + item.title + " and I really enjoyed watching it!" + item.poster;
+                        message = "I just saw this movie: " + item.title + " and I really enjoyed watching it! " + item.poster;
                         subject = "Latest Movie I Watched";
                         this.socialSharing.canShareViaEmail().then(function () {
                             _this.socialSharing.share(message, subject, "www/" + item.poster).then(function () {

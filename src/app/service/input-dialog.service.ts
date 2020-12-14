@@ -9,49 +9,28 @@ export class InputDialogService {
 
   constructor(public dataService: MovieService, public alertController: AlertController) { }
 
-  async moveDetail(item) {
+  async moveDetail(movie,index?) {
+    console.log("ADDING: " + movie);
     const alert = await this.alertController.create({
-      header: item.title,
+      header: movie.title,
+      message: movie.plot + 
+               '<br><br><img src=' + movie.poster + ' style="height:10%;width: 10%">' +
+               '<br><br><div class="card-detail">Actors: ' + movie.actors + 
+               '<br><br>Director: ' + movie.director +
+               '<br><br>Rating: ' + movie.rated +
+               '<br><br>Year: ' + movie.year +
+               '<br><br>Genre: ' + movie.genre +
+               '<br><br>Year: ' + movie.year +
+               '<br><br>Language: ' + movie.language +
+               '<br><br>Runtim : ' + movie.runtime + '</div>',
       inputs: [
         {
-          name: 'rated',
-          placeholder: 'Rated',
-          value: item.rated,
+          name: '_id',
+          placeholder: '_id',
+          value: movie.imdbID,
           disabled: true,
         },
-        {
-          name: 'year',
-          placeholder: 'Year',
-          value: item.year,
-          disabled: true, 
-        },
-        {
-          name: 'language',
-          placeholder: 'Language',
-          value: item.language,
-          disabled: true, 
-        },
-        {
-          name: 'genre',
-          placeholder: 'Genre',
-          value: item.genre,
-          disabled: true, 
-        },
-        {
-          name: 'director',
-          placeholder: 'Director',
-          value: item.director,
-          disabled: true, 
-        },
-        {
-          name: 'runtime',
-          placeholder: 'Runtime',
-          value: item.runtime,
-          disabled: true, 
-        },
-      
       ],
-      message: item.plot + '<br><br>Actors: ' + item.actors,
       buttons: [
         {
           text: 'Done',
@@ -59,6 +38,13 @@ export class InputDialogService {
           cssClass: 'secondary',
           handler: () => {
             console.log('Done item detail');
+          },
+        },
+        {
+          text: movie ? 'Save' : 'Add',
+          handler: () => {
+              console.log("ADDING: " + movie.imdbID);
+              this.dataService.addMovie(movie);
           }
         }
       ]

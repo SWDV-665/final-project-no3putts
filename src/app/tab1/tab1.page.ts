@@ -17,6 +17,7 @@ export interface Movie {
   genre: string;
   actors: string;
   language: string;
+  poster: string;
 }
 @Component({
   selector: 'app-tab1',
@@ -26,7 +27,7 @@ export interface Movie {
 
 export class Tab1Page{
 
-  title = "Movie Finder";
+  title = "FlickShare";
   items: Movie[];
   movie: Movie;
   errorMessage: String;
@@ -81,7 +82,7 @@ export class Tab1Page{
     });
     toast.present();  // displays toast 
     
-    let message = "I just saw this movie: " + item.title + " and I really enjoyed watching it!" + item.poster;
+    let message = "I just saw this movie: " + item.title + " and I really enjoyed watching it! " + item.poster;
     let subject = "Latest Movie I Watched";
 
     this.socialSharing.canShareViaEmail().then(()=>{
